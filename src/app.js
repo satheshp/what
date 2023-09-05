@@ -41,6 +41,15 @@ app.get('/get',(req,res)=>{
     })
 })
 
+app.get('/num',(req,res)=>{
+    if(!req.query.number){
+        return res.send('number query is required')
+        
+    }
+    const n =req.query.number
+    res.send('<img src="https://api.qrserver.com/v1/create-qr-code/?data=tel:'+encodeURIComponent(n)+'&amp;size=100x100" alt="error_to_load" title="qr_code" />')
+
+})
 app.listen(port ,()=>{
     console.log('Listening to the port'+port )
 })

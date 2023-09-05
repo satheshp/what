@@ -18,6 +18,11 @@ hbs.registerPartials(ppp)
 app.get('/',(req,res)=>{
     res.render('index')
 })
+app.get('/n',(req,res)=>{
+    res.render('q')
+})
+
+
 app.get('/get',(req,res)=>{
     if(!req.query.number){
         return res.send('number query is required')
@@ -47,8 +52,18 @@ app.get('/num',(req,res)=>{
         
     }
     const n =req.query.number
-    res.send('<img src="https://api.qrserver.com/v1/create-qr-code/?data=tel:'+encodeURIComponent(n)+'&amp;size=100x100" alt="error_to_load" title="qr_code" />')
-
+    
+    verifyPhone(n,(error,msg)=>{
+        if(error){
+          return  res.send(error)
+          
+        }
+        else{
+            
+           
+           res.send({st:'<img src="https://api.qrserver.com/v1/create-qr-code/?data=tel:'+encodeURIComponent(n)+'&amp;size=100x100" alt="error_to_load" title="qr_code" />'})
+        }
+    })
 })
 app.listen(port ,()=>{
     console.log('Listening to the port'+port )

@@ -1,21 +1,21 @@
 const f = document.querySelector('form');
 const n = document.querySelector('input[name="number"]');
-const t = document.querySelector('input[name="text"]');
+
 const resultContainer = document.getElementById('result-container');
 const msg = document.getElementById('message');
-let imgTag; // Store the reference to the img tag globally
+let imgTag; 
 
 f.addEventListener('submit', (e) => {
     e.preventDefault();
     const nv = n.value;
-    const tv = t.value;
+    
 
     // Check if there's an existing img tag in the resultContainer and remove it
     if (imgTag) {
         resultContainer.removeChild(imgTag);
     }
 
-    fetch('/get?number=' + nv + '&text=' + tv)
+    fetch('/num?number=' + nv)
         .then((response) => response.json()) // Parse the response as JSON
         .then((data) => {
             // Create a new div element to contain the fetched HTML
